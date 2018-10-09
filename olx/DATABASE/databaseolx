@@ -1,0 +1,78 @@
+create database dbms;
+
+use dbms;
+create TABLE Users(
+    Nitcemailid varchar(255) NOT NULL PRIMARY KEY,
+    Username varchar(255),
+    Mobilenum varchar(255),
+    Usertype varchar(255),
+    pass_word varchar(255)
+);
+
+
+CREATE TABLE Advertisements(
+    advid int(255) auto_increment,
+    itemname varchar(255),
+    itemtype varchar(255),
+    dateofinit varchar(255),
+    dateofexp varchar(255),
+    ownerid varchar(255),
+    buyerid varchar(255),
+    primary key(advid),
+    foreign key(ownerid) references Users(Nitcemailid),
+    foreign key(buyerid) references Users(Nitcemailid)
+);
+drop table Advertisements;
+alter table Advertisements add column itemtype varchar(255);
+
+CREATE TABLE Author(
+    productid int(255),
+    authorname varchar(255),
+    foreign key(productid) references books(productid)
+);
+drop table Author;
+
+create table laptop(
+productid int(255),
+modelname varchar(255),
+    manufacturer varchar(255),
+    yof varchar(10),
+    expectedprice varchar(50),
+    batterystatus varchar(255),
+    primary key(productid),
+    foreign key(productid) references Advertisements(advid)
+    );
+drop table laptop;    
+create table mobile(
+productid int(255),
+modelname varchar(255),
+    manufacturer varchar(255),
+    yof varchar(10),
+    expectedprice varchar(50),
+    primary key(productid),
+    foreign key(productid) references Advertisements(advid)
+    );
+    drop table mobile;
+    
+    create table books(
+    productid int(255),
+    expectedprice varchar(50),
+    nameofbook varchar(255),
+    itemcondition varchar(255),
+     primary key(productid),
+         foreign key(productid) references Advertisements(advid)
+    );
+    
+    drop table books;
+    
+    create table Messages(
+    message_id int(255) auto_increment,
+    message varchar(255),
+    receiver_id varchar(255),
+    sender_id varchar(255),
+    msg_date varchar(255), 
+    msg_time varchar(255),
+    primary key(message_id),
+    foreign key(receiver_id) references Users(Nitcemailid),
+    foreign key(sender_id) references Users(Nitcemailid)
+    );
